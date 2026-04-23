@@ -1,0 +1,6 @@
+.vscode
+weighted_algo
+sortedness_tests*
+.part_selection_tmp
+.sortedness_tmp
+weights_sequences.csv
