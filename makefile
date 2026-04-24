@@ -25,9 +25,9 @@ run_weighted: $(WEIGHTED_EXEC)
 run_weighted_all: $(WEIGHTED_EXEC)
 	./$(WEIGHTED_EXEC) tests_random/3Comp9Ver.txt all weights_sequences.csv
 
-# Repeat randomized weighted runs on the proposed RW input (100 reps)
+# Repeat randomized weighted runs on the proposed SYNTHETIC input (100 reps)
 run_weighted_randomized: $(WEIGHTED_EXEC)
-	$(PYTHON) scripts/run_weighted_randomized_average.py tests_random/RW.txt --reps 100 --seed 12345 --max-rows-per-mode 0 --output-summary RW_average_summary_100.csv --output-raw RW_average_runs_100.csv
+	$(PYTHON) scripts/run_weighted_randomized_average.py tests_random/SYNTHETIC.txt --reps 100 --seed 12345 --max-rows-per-mode 0 --output-summary SYNTHETIC_average_summary_100.csv --output-raw SYNTHETIC_average_runs_100.csv
 
 # Repeat randomized weighted runs on 3Comp9Ver (100 reps)
 run_weighted_randomized_3comp9: $(WEIGHTED_EXEC)

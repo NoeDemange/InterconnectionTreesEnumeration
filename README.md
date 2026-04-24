@@ -104,7 +104,7 @@ The Makefile is now focused on `weighted_algo`.
 
     Direct example (the originally proposed case, 100 repetitions):
     ```bash
-    python3 scripts/run_weighted_randomized_average.py tests_random/RW.txt --reps 100 --seed 12345 --max-rows-per-mode 0 --output-summary RW_average_summary_100.csv --output-raw RW_average_runs_100.csv
+    python3 scripts/run_weighted_randomized_average.py tests_random/SYNTHETIC.txt --reps 100 --seed 12345 --max-rows-per-mode 0 --output-summary SYNTHETIC_average_summary_100.csv --output-raw SYNTHETIC_average_runs_100.csv
     ```
 
     Via Makefile:
