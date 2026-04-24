@@ -1099,7 +1099,7 @@ int main(int argc, char** argv) {
                 edge_weight[i][j] = edge_weight[j][i] = sqrt(dx * dx + dy * dy + dz * dz);
             } else {
                 // Otherwise, assign a random weight between 0.1 and 10.0.
-                edge_weight[i][j] = edge_weight[j][i] = ((double)(rand() % 1000) / 1000.0) * 9.9 + 0.1;
+                edge_weight[i][j] = edge_weight[j][i] = 0.1 + 9.9 * ((double)rand() / (double)RAND_MAX);
             }
         }
     }

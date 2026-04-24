@@ -102,9 +102,9 @@ The Makefile is now focused on `weighted_algo`.
 
     Important: in each repetition, the script runs `weighted_algo` in `all` mode, so the weight matrix is the same across `non_ordered`, `sorted_at_end`, and `ordered` for that repetition (fair comparison).
 
-    Direct example (the originally proposed case, 100 repetitions):
+    Direct example (the originally proposed case, 50 repetitions):
     ```bash
-    python3 scripts/run_weighted_randomized_average.py tests_random/SYNTHETIC.txt --reps 100 --seed 12345 --max-rows-per-mode 0 --output-summary SYNTHETIC_average_summary_100.csv --output-raw SYNTHETIC_average_runs_100.csv
+    python3 scripts/run_weighted_randomized_average.py tests_random/SYNTHETIC.txt --reps 50 --seed 12345 --max-rows-per-mode 0 --output-summary SYNTHETIC_average_summary_50.csv --output-raw SYNTHETIC_average_runs_50.csv
     ```
 
     Via Makefile:
