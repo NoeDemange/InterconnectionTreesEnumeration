@@ -65,6 +65,15 @@ test_part_selection: $(WEIGHTED_EXEC)
 show_part_selection: test_part_selection
 	head -n 20 part_selection_ordered_tests.csv
 
+# Run part selection methods test on SYNTHETIC graph (50 reps each)
+run_weighted_randomized_part_selection: $(WEIGHTED_EXEC)
+	$(PYTHON) scripts/run_weighted_randomized_part_selection.py --reps 50 --seed 12345 --max-rows-per-mode 0 --output-summary SYNTHETIC_part_selection_summary_50.csv --output-aggregate SYNTHETIC_part_selection_aggregate_50.csv
+
+# Display part selection randomized test aggregated results
+show_randomized_part_selection: run_weighted_randomized_part_selection
+	cat SYNTHETIC_part_selection_aggregate_50.csv
+
 # Clean up generated files
 clean:
 	rm -f $(WEIGHTED_EXEC)
+	rm -f *.csv

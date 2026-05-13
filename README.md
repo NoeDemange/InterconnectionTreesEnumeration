@@ -259,6 +259,67 @@ Direct `ordered` vs `non_ordered` comparison:
     - `inversion_reduction_pct` (in %): relative gain of ordered over inversion count.
     - `run_reduction_pct` (in %): relative gain of ordered over excess runs (`run_count - 1`, because the sorted optimum is 1 run).
 
+### Randomized part-selection comparison on SYNTHETIC (`scripts/run_weighted_randomized_part_selection.py`)
+
+The script `scripts/run_weighted_randomized_part_selection.py` evaluates the **four component-selection methods** by running them multiple times on the same input (SYNTHETIC graph) with **different random seeds**. This provides a statistical comparison of method effectiveness across different weight assignments.
+
+#### Purpose
+
+While `scripts/run_part_selection_tests.py` tests all methods on a single weight assignment per file, this script repeats the test with fresh random weights on each run, allowing you to:
+- Assess method robustness across different weight scenarios.
+- Collect statistics (mean, std, min, max) per method.
+- Identify which method consistently produces better enumeration sequences.
+
+#### Output format
+
+The script generates two CSV files:
+
+**Per-run metrics** (`*_summary_*.csv`):
+- One row per run per method.
+- Columns: `run`, `seed`, `part_selection`, `count`, `inversion_count`, `run_count`, `mean_weight`.
+
+**Aggregated statistics** (`*_aggregate_*.csv`):
+- One row per method with aggregated metrics across all repetitions.
+- Columns: `part_selection`, `reps`, and for each metric (`count`, `inversion_count`, `run_count`, `mean_weight`):
+  - `*_mean`, `*_std`, `*_min`, `*_max`.
+
+#### Usage
+
+Via Makefile (compiles `weighted_algo` if needed):
+```bash
+make run_weighted_randomized_part_selection   # run 50 repetitions on SYNTHETIC graph
+make show_randomized_part_selection           # display the aggregated results
+```
+
+Direct script execution:
+```bash
+python3 scripts/run_weighted_randomized_part_selection.py --reps 50 --seed 12345 --output-summary summary.csv --output-aggregate aggregate.csv
+```
+
+Available options:
+- `--input FILE`: input partition file (default: `tests_random/SYNTHETIC.txt`).
+- `--reps N`: number of repetitions per method (default: `50`).
+- `--seed SEED`: base seed for random weights (each run uses seed + run_index).
+- `--weighted-binary PATH`: path to `weighted_algo` executable (default: `./weighted_algo`).
+- `--output-summary FILE`: CSV file for per-run metrics (default: `weighted_randomized_part_selection_summary.csv`).
+- `--output-aggregate FILE`: CSV file for aggregated statistics (default: `weighted_randomized_part_selection_aggregate.csv`).
+- `--max-rows-per-mode N`: limit rows per mode (default: `0` = unlimited).
+- `--time-limit SEC`: optional time limit per run.
+
+#### Example workflow
+
+```bash
+# Run 50 repetitions on SYNTHETIC, test all 4 methods
+python3 scripts/run_weighted_randomized_part_selection.py --reps 50 --seed 42
+
+# View aggregated results (mean and std across repetitions)
+head -5 weighted_randomized_part_selection_aggregate.csv
+```
+
+The aggregated output will show:
+- Which method yields the lowest `inversion_count_mean` (fewer inversions on average).
+- Which method yields the lowest `run_count_mean` (fewer runs on average).
+- Statistical stability (low `*_std` = consistent across different weights).
 
 ### Input file
 
